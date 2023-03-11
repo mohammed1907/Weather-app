@@ -2,7 +2,7 @@
 //  UIView+Identifier.swift
 //  WeatherApp
 //
-//  Created by Omar Hassanein on 11/03/2023.
+//  Created by Farghaly on 11/03/2023.
 //
 
 import UIKit
@@ -11,8 +11,12 @@ extension UIView {
     static var identifier: String {
         return String(describing: self)
     }
+ 
 }
 extension UIViewController {
+    static var identifier: String {
+        return String(describing: self)
+    }
     func showAlert( _ message: String ) {
         let alert = UIAlertController(title: "Alert", message: message, preferredStyle: .alert)
         alert.addAction( UIAlertAction(title: "Ok", style: .cancel, handler: nil))
@@ -27,4 +31,5 @@ extension UIViewController {
         @objc func dismissKeyboard() {
             view.endEditing(true)
         }
+
 }

@@ -2,7 +2,7 @@
 //  NetworkRouter.swift
 //  WeatherApp
 //
-//  Created by Omar Hassanein on 11/03/2023.
+//  Created by Farghaly on 11/03/2023.
 //
 
 import Alamofire
@@ -27,7 +27,7 @@ enum NetworkRouter: URLRequestConvertible {
     var parameters: [String: Any]? {
         switch self {
         case .getWeather(let name):
-            let parameters = ["q": name]
+            let parameters = ["q": name,"appid": Config.apiKey]
             return parameters
         }
     }

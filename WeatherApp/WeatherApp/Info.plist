@@ -6,6 +6,12 @@
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
 		<false/>
+		<key>UIAppFonts</key>
+		<array>
+			<string>sf-pro-text-bold.ttf</string>
+			<string>sf-pro-text-regular.ttf</string>
+			<string>sf-pro-text-medium.ttf</string>
+		</array>
 		<key>UISceneConfigurations</key>
 		<dict>
 			<key>UIWindowSceneSessionRoleApplication</key>
