@@ -129,8 +129,9 @@
                                 <rect key="frame" x="0.0" y="166" width="393" height="652"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
-                            <searchBar contentMode="redraw" placeholder="Search" translatesAutoresizingMaskIntoConstraints="NO" id="QNH-iM-EYh">
+                            <searchBar contentMode="redraw" searchBarStyle="minimal" placeholder="Search" translatesAutoresizingMaskIntoConstraints="NO" id="QNH-iM-EYh">
                                 <rect key="frame" x="16" y="102" width="295" height="56"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <connections>
                                     <outlet property="delegate" destination="ENI-Og-26g" id="eqk-yT-Yjv"/>
@@ -185,10 +186,294 @@
             </objects>
             <point key="canvasLocation" x="780.91603053435108" y="10.563380281690142"/>
         </scene>
+        <!--Weather Details View Controller-->
+        <scene sceneID="Klm-ky-Zxy">
+            <objects>
+                <viewController storyboardIdentifier="WeatherDetailsViewController" id="vRa-HL-1at" customClass="WeatherDetailsViewController" customModule="WeatherApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="d7J-im-3Wo" customClass="Gradient" customModule="WeatherApp" customModuleProvider="target">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cities" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7g2-bf-Z5H">
+                                <rect key="frame" x="172" y="76" width="49.333333333333343" height="23.666666666666671"/>
+                                <fontDescription key="fontDescription" name="SFProText-Bold" family="SF Pro Text" pointSize="17"/>
+                                <color key="textColor" name="titleColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jwT-Ld-Ffv">
+                                <rect key="frame" x="0.0" y="76" width="77" height="53"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="77" id="IS8-yY-eFU"/>
+                                    <constraint firstAttribute="height" constant="53" id="UVr-nA-AkX"/>
+                                </constraints>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" image="Button_left"/>
+                                <buttonConfiguration key="configuration" style="plain" image="Button_modal"/>
+                                <connections>
+                                    <action selector="dismissPressed:" destination="vRa-HL-1at" eventType="touchUpInside" id="Lps-sW-qFU"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="x" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dyn-Gl-nig">
+                                <rect key="frame" x="20" y="61" width="13.333333333333336" height="34.666666666666657"/>
+                                <fontDescription key="fontDescription" name="SFProText-Regular" family="SF Pro Text" pointSize="25"/>
+                                <color key="textColor" name="buttonTitle"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Background" translatesAutoresizingMaskIntoConstraints="NO" id="PcQ-bb-HeT">
+                                <rect key="frame" x="0.0" y="597" width="393" height="255"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="255" id="pj6-wf-nJW"/>
+                                </constraints>
+                            </imageView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="226-mX-pSv">
+                                <rect key="frame" x="45" y="129.66666666666663" width="303" height="346"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Ale-EL-lO8">
+                                        <rect key="frame" x="91.666666666666657" y="30" width="120" height="90"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="120" id="ATu-3b-d0t"/>
+                                            <constraint firstAttribute="height" constant="90" id="F2z-2d-9o0"/>
+                                        </constraints>
+                                    </imageView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="7xA-2z-mbR">
+                                        <rect key="frame" x="30" y="165.00000000000003" width="243" height="135.99999999999997"/>
+                                        <subviews>
+                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="66Y-5R-lyj">
+                                                <rect key="frame" x="0.0" y="0.0" width="243" height="28"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DESCRIPTION" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rt9-ZP-bOJ">
+                                                        <rect key="frame" x="0.0" y="0.0" width="117.66666666666667" height="28"/>
+                                                        <fontDescription key="fontDescription" name="SFProText-Bold" family="SF Pro Text" pointSize="12"/>
+                                                        <color key="textColor" name="titleColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cloudy" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IcM-9N-d8P">
+                                                        <rect key="frame" x="125.66666666666666" y="0.0" width="117.33333333333334" height="28"/>
+                                                        <fontDescription key="fontDescription" name="SFProText-Bold" family="SF Pro Text" pointSize="20"/>
+                                                        <color key="textColor" name="weatherData"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                            </stackView>
+                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="rA6-9b-94u">
+                                                <rect key="frame" x="0.0" y="36" width="243" height="28"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TEMPRATURE" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L0p-6x-b8Q">
+                                                        <rect key="frame" x="0.0" y="0.0" width="117.66666666666667" height="28"/>
+                                                        <fontDescription key="fontDescription" name="SFProText-Bold" family="SF Pro Text" pointSize="12"/>
+                                                        <color key="textColor" name="titleColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cloudy" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DaC-kG-tyh">
+                                                        <rect key="frame" x="125.66666666666666" y="0.0" width="117.33333333333334" height="28"/>
+                                                        <fontDescription key="fontDescription" name="SFProText-Bold" family="SF Pro Text" pointSize="20"/>
+                                                        <color key="textColor" name="weatherData"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                            </stackView>
+                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="IFN-Xh-V3H">
+                                                <rect key="frame" x="0.0" y="72" width="243" height="28"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="HUMIDITY" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z5a-5P-5h7">
+                                                        <rect key="frame" x="0.0" y="0.0" width="117.66666666666667" height="28"/>
+                                                        <fontDescription key="fontDescription" name="SFProText-Bold" family="SF Pro Text" pointSize="12"/>
+                                                        <color key="textColor" name="titleColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cloudy" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iin-D6-dbq">
+                                                        <rect key="frame" x="125.66666666666666" y="0.0" width="117.33333333333334" height="28"/>
+                                                        <fontDescription key="fontDescription" name="SFProText-Bold" family="SF Pro Text" pointSize="20"/>
+                                                        <color key="textColor" name="weatherData"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                            </stackView>
+                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="1Wl-iN-jfh">
+                                                <rect key="frame" x="0.0" y="108" width="243" height="28"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="WINDSPEED" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MgD-TW-CWJ">
+                                                        <rect key="frame" x="0.0" y="0.0" width="117.66666666666667" height="28"/>
+                                                        <fontDescription key="fontDescription" name="SFProText-Bold" family="SF Pro Text" pointSize="12"/>
+                                                        <color key="textColor" name="titleColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cloudy" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bkt-6i-phv">
+                                                        <rect key="frame" x="125.66666666666666" y="0.0" width="117.33333333333334" height="28"/>
+                                                        <fontDescription key="fontDescription" name="SFProText-Bold" family="SF Pro Text" pointSize="20"/>
+                                                        <color key="textColor" name="weatherData"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                            </stackView>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstItem="7xA-2z-mbR" firstAttribute="leading" secondItem="226-mX-pSv" secondAttribute="leading" constant="30" id="9cw-D3-oy8"/>
+                                    <constraint firstAttribute="trailing" secondItem="7xA-2z-mbR" secondAttribute="trailing" constant="30" id="JgG-UA-5x3"/>
+                                    <constraint firstItem="Ale-EL-lO8" firstAttribute="centerX" secondItem="226-mX-pSv" secondAttribute="centerX" id="LnA-0L-M9w"/>
+                                    <constraint firstAttribute="bottom" secondItem="7xA-2z-mbR" secondAttribute="bottom" constant="45" id="hc9-HF-ImQ"/>
+                                    <constraint firstItem="7xA-2z-mbR" firstAttribute="top" secondItem="Ale-EL-lO8" secondAttribute="bottom" constant="45" id="k9t-Wd-0vj"/>
+                                    <constraint firstItem="Ale-EL-lO8" firstAttribute="top" secondItem="226-mX-pSv" secondAttribute="top" constant="30" id="tqY-ws-6J5"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="24"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Y7-7g-bMg">
+                                <rect key="frame" x="16" y="794" width="361" height="0.0"/>
+                                <fontDescription key="fontDescription" name="SFProText-Regular" family="SF Pro Text" pointSize="12"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="XI6-WD-MXs"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="7g2-bf-Z5H" firstAttribute="top" secondItem="XI6-WD-MXs" secondAttribute="top" constant="17" id="5UD-KS-7x7"/>
+                            <constraint firstItem="jwT-Ld-Ffv" firstAttribute="leading" secondItem="XI6-WD-MXs" secondAttribute="leading" id="9Ic-yN-WAV"/>
+                            <constraint firstItem="1Y7-7g-bMg" firstAttribute="leading" secondItem="XI6-WD-MXs" secondAttribute="leading" constant="16" id="CEr-VR-FYr"/>
+                            <constraint firstItem="Dyn-Gl-nig" firstAttribute="leading" secondItem="XI6-WD-MXs" secondAttribute="leading" constant="20" id="LJ0-JA-jcb"/>
+                            <constraint firstItem="XI6-WD-MXs" firstAttribute="trailing" secondItem="PcQ-bb-HeT" secondAttribute="trailing" id="PHb-GI-w90"/>
+                            <constraint firstItem="226-mX-pSv" firstAttribute="top" secondItem="7g2-bf-Z5H" secondAttribute="bottom" constant="30" id="Pkd-I8-80F"/>
+                            <constraint firstItem="XI6-WD-MXs" firstAttribute="bottom" secondItem="1Y7-7g-bMg" secondAttribute="bottom" constant="24" id="UgU-XE-YRS"/>
+                            <constraint firstItem="Dyn-Gl-nig" firstAttribute="top" secondItem="XI6-WD-MXs" secondAttribute="top" constant="2" id="fiP-ZB-y8j"/>
+                            <constraint firstItem="226-mX-pSv" firstAttribute="leading" secondItem="XI6-WD-MXs" secondAttribute="leading" constant="45" id="hnj-3c-0db"/>
+                            <constraint firstAttribute="bottom" secondItem="PcQ-bb-HeT" secondAttribute="bottom" id="j8d-em-2BG"/>
+                            <constraint firstItem="XI6-WD-MXs" firstAttribute="trailing" secondItem="1Y7-7g-bMg" secondAttribute="trailing" constant="16" id="jsY-n0-iot"/>
+                            <constraint firstItem="PcQ-bb-HeT" firstAttribute="leading" secondItem="XI6-WD-MXs" secondAttribute="leading" id="lQG-Yz-Sx7"/>
+                            <constraint firstItem="226-mX-pSv" firstAttribute="centerX" secondItem="d7J-im-3Wo" secondAttribute="centerX" id="mQR-bD-2R4"/>
+                            <constraint firstItem="XI6-WD-MXs" firstAttribute="trailing" secondItem="226-mX-pSv" secondAttribute="trailing" constant="45" id="qsG-2T-Kiy"/>
+                            <constraint firstItem="jwT-Ld-Ffv" firstAttribute="leading" secondItem="XI6-WD-MXs" secondAttribute="leading" id="vK9-bb-bJj"/>
+                            <constraint firstItem="jwT-Ld-Ffv" firstAttribute="top" secondItem="XI6-WD-MXs" secondAttribute="top" constant="17" id="vzu-ok-c12"/>
+                            <constraint firstItem="7g2-bf-Z5H" firstAttribute="centerX" secondItem="d7J-im-3Wo" secondAttribute="centerX" id="w6g-iT-XFX"/>
+                        </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="startLocation">
+                                <real key="value" value="0.0"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="number" keyPath="endLocation">
+                                <real key="value" value="1"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="color" keyPath="startColor">
+                                <color key="value" name="BGFirstGradient"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="color" keyPath="endColor">
+                                <color key="value" name="BGSecondGradient"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </view>
+                    <connections>
+                        <outlet property="cityTitle" destination="7g2-bf-Z5H" id="8Kv-aI-xcM"/>
+                        <outlet property="containerView" destination="226-mX-pSv" id="pcb-GT-LfF"/>
+                        <outlet property="weatherDate" destination="1Y7-7g-bMg" id="Avh-tJ-6h8"/>
+                        <outlet property="weatherDescription" destination="IcM-9N-d8P" id="joq-uN-2TC"/>
+                        <outlet property="weatherHumidity" destination="iin-D6-dbq" id="fXC-HF-roK"/>
+                        <outlet property="weatherImage" destination="Ale-EL-lO8" id="R87-IR-7Iq"/>
+                        <outlet property="weatherTemprature" destination="DaC-kG-tyh" id="wMm-4M-ZCR"/>
+                        <outlet property="weatherWind" destination="bkt-6i-phv" id="QuX-kI-enc"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="uAe-or-c8H" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1442" y="11"/>
+        </scene>
+        <!--Historical View Controller-->
+        <scene sceneID="pD6-cI-0QU">
+            <objects>
+                <viewController storyboardIdentifier="HistoricalViewController" id="bGi-3o-bfa" customClass="HistoricalViewController" customModule="WeatherApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="56C-ue-wqK" customClass="Gradient" customModule="WeatherApp" customModuleProvider="target">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cities" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="00S-xJ-zIG">
+                                <rect key="frame" x="172" y="76" width="49.333333333333343" height="23.666666666666671"/>
+                                <fontDescription key="fontDescription" name="SFProText-Bold" family="SF Pro Text" pointSize="17"/>
+                                <color key="textColor" name="titleColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fk1-oE-rGu">
+                                <rect key="frame" x="0.0" y="76" width="77" height="53"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="53" id="mQe-ho-WiO"/>
+                                    <constraint firstAttribute="width" constant="77" id="zG4-1e-Ciq"/>
+                                </constraints>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" image="Button_left"/>
+                                <buttonConfiguration key="configuration" style="plain" image="Button_modal"/>
+                                <connections>
+                                    <action selector="dismissPressed:" destination="bGi-3o-bfa" eventType="touchUpInside" id="aBu-gW-hos"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="&lt;-" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uhw-XP-jzs">
+                                <rect key="frame" x="16" y="61" width="23.666666666666671" height="29"/>
+                                <fontDescription key="fontDescription" name="SFProText-Regular" family="SF Pro Text" pointSize="21"/>
+                                <color key="textColor" name="buttonTitle"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Background" translatesAutoresizingMaskIntoConstraints="NO" id="0VB-7V-LCs">
+                                <rect key="frame" x="0.0" y="597" width="393" height="255"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="255" id="7ne-cK-A7l"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GEa-Gh-juq">
+                                <rect key="frame" x="16" y="794" width="361" height="0.0"/>
+                                <fontDescription key="fontDescription" name="SFProText-Regular" family="SF Pro Text" pointSize="12"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="gDG-lz-7vz"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="gDG-lz-7vz" firstAttribute="bottom" secondItem="GEa-Gh-juq" secondAttribute="bottom" constant="24" id="0hR-ZF-MET"/>
+                            <constraint firstAttribute="bottom" secondItem="0VB-7V-LCs" secondAttribute="bottom" id="45l-N2-dbU"/>
+                            <constraint firstItem="fk1-oE-rGu" firstAttribute="leading" secondItem="gDG-lz-7vz" secondAttribute="leading" id="7DW-1V-pbL"/>
+                            <constraint firstItem="00S-xJ-zIG" firstAttribute="top" secondItem="gDG-lz-7vz" secondAttribute="top" constant="17" id="Cg7-6W-Ixv"/>
+                            <constraint firstItem="0VB-7V-LCs" firstAttribute="leading" secondItem="gDG-lz-7vz" secondAttribute="leading" id="CrL-bD-Bzc"/>
+                            <constraint firstItem="Uhw-XP-jzs" firstAttribute="top" secondItem="gDG-lz-7vz" secondAttribute="top" constant="2" id="JQr-YQ-YQv"/>
+                            <constraint firstItem="fk1-oE-rGu" firstAttribute="leading" secondItem="gDG-lz-7vz" secondAttribute="leading" id="K7y-He-4ed"/>
+                            <constraint firstItem="Uhw-XP-jzs" firstAttribute="leading" secondItem="gDG-lz-7vz" secondAttribute="leading" constant="16" id="KeV-uh-lm9"/>
+                            <constraint firstItem="gDG-lz-7vz" firstAttribute="trailing" secondItem="0VB-7V-LCs" secondAttribute="trailing" id="LHH-la-Kby"/>
+                            <constraint firstItem="fk1-oE-rGu" firstAttribute="top" secondItem="gDG-lz-7vz" secondAttribute="top" constant="17" id="OGS-P3-oWF"/>
+                            <constraint firstItem="GEa-Gh-juq" firstAttribute="leading" secondItem="gDG-lz-7vz" secondAttribute="leading" constant="16" id="Pxa-Px-831"/>
+                            <constraint firstItem="00S-xJ-zIG" firstAttribute="centerX" secondItem="56C-ue-wqK" secondAttribute="centerX" id="cb1-NF-cNq"/>
+                            <constraint firstItem="gDG-lz-7vz" firstAttribute="trailing" secondItem="GEa-Gh-juq" secondAttribute="trailing" constant="16" id="hJf-Gs-NxF"/>
+                        </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="startLocation">
+                                <real key="value" value="0.0"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="number" keyPath="endLocation">
+                                <real key="value" value="1"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="color" keyPath="startColor">
+                                <color key="value" name="BGFirstGradient"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="color" keyPath="endColor">
+                                <color key="value" name="BGSecondGradient"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </view>
+                    <connections>
+                        <outlet property="cityTitle" destination="00S-xJ-zIG" id="DQW-Gr-qeR"/>
+                        <outlet property="weatherDate" destination="GEa-Gh-juq" id="Oau-Ha-r4X"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="z3J-7P-OhZ" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2153" y="11"/>
+        </scene>
     </scenes>
     <resources>
         <image name="Background" width="375" height="223"/>
         <image name="Button_left" width="102" height="113"/>
+        <image name="Button_modal" width="102" height="113"/>
         <image name="Button_right" width="101" height="113"/>
         <namedColor name="BGFirstGradient">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -201,6 +486,9 @@
         </namedColor>
         <namedColor name="titleColor">
             <color red="0.23921568627450981" green="0.27058823529411763" blue="0.28235294117647058" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="weatherData">
+            <color red="0.13725490196078433" green="0.53333333333333333" blue="0.7803921568627451" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

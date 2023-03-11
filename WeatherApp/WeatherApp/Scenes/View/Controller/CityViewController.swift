@@ -41,7 +41,7 @@ private extension CityViewController{
 // MARK: - Setup Binding
 private extension CityViewController {
     func setupBinding() {
-        viewModel.reloadTableViewClosure = { [weak self] () in
+        viewModel.reloadData = { [weak self] () in
             guard let self = self else {
                 return
             }
@@ -59,7 +59,6 @@ extension CityViewController: WeatherInfo{
     }
     
     func getCity(name: String) {
-        print("dkdk\(name)")
         viewModel.cityArray?.append(name)
     }
     
@@ -87,6 +86,9 @@ extension CityViewController: UITableViewDataSource {
 extension CityViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         //TODO: Navigate to details
+        let controller = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: WeatherDetailsViewController.identifier) as! WeatherDetailsViewController
+        controller.cityName = viewModel.getCellViewModel( at: indexPath )
+        self.present(controller, animated: true)
         //TODO: Handle coreData
         
     }

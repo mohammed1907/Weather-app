@@ -11,7 +11,18 @@ extension UIView {
     static var identifier: String {
         return String(describing: self)
     }
- 
+    
+    func dropShadow(scale: Bool = true) {
+        layer.masksToBounds = false
+        layer.shadowColor = UIColor.black.cgColor
+        layer.shadowOpacity = 0.25
+        layer.shadowOffset = CGSize.zero
+        layer.shadowRadius = 2
+        layer.shadowColor = UIColor(named:"shadowColor")?.cgColor
+        layer.shadowPath = UIBezierPath(rect: bounds).cgPath
+        layer.shouldRasterize = true
+        layer.rasterizationScale = scale ? UIScreen.main.scale : 1
+    }
 }
 extension UIViewController {
     static var identifier: String {

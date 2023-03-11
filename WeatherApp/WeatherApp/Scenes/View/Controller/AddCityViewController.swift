@@ -79,7 +79,7 @@ private extension AddCityViewController {
                 }
             }
         }
-        viewModel.reloadTableViewClosure = { [weak self] () in
+        viewModel.reloadData = { [weak self] () in
             guard let self = self else {
                 return
             }
@@ -101,7 +101,7 @@ extension AddCityViewController: UITableViewDataSource {
             fatalError("Cell not exists in storyboard")
         }
         let cellVM = viewModel.getCellViewModel( at: indexPath )
-        cell.searchData = cellVM
+        cell.searchData = cellVM.cityName
         return cell
     }
 }
@@ -109,7 +109,7 @@ extension AddCityViewController: UITableViewDataSource {
 // MARK: - TableView Delegate
 extension AddCityViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        delegate?.getCity(name: viewModel.getCellViewModel( at: indexPath ))
+        delegate?.getCity(name: viewModel.getCellViewModel( at: indexPath ).cityName)
         dismiss(animated: true)
 
     }

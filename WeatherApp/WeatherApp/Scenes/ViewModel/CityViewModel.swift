@@ -14,7 +14,7 @@ protocol CityViewModelLogic {
     // MARK: Actions
     func getCellViewModel( at indexPath: IndexPath ) -> String
     func getTime() -> String
-    var reloadTableViewClosure: (() -> Void)? { get set }
+    var reloadData: (() -> Void)? { get set }
 }
 
 class CityViewModel: CityViewModelLogic {
@@ -22,14 +22,14 @@ class CityViewModel: CityViewModelLogic {
     // MARK: - fetched result from addcity
     var cityArray: [String]? = [] {
         didSet {
-            self.reloadTableViewClosure?()
+            self.reloadData?()
         }
     }
     var numberOfCells: Int {
         return cityArray?.count ?? 0
     }
     // MARK: closures for binding
-    var reloadTableViewClosure: (() -> Void)?
+    var reloadData: (() -> Void)?
 
     
     // MARK: - process fetched result

@@ -9,18 +9,17 @@ import Foundation
 
 protocol WeatherViewModelLogic {
     // MARK: Properties
-    var weatherInfo: WeatherInfoModel? { get }
+    var weatherInfo: WeatherInfoViewModel? { get }
     var alertMessage: String? { get }
     var state: State { get }
     var numberOfCells: Int { get }
 
     // MARK: Actions
     func getWeather(name: String)
-    func getCellViewModel( at indexPath: IndexPath ) -> String
-    func getTime() -> String
+    func getCellViewModel( at indexPath: IndexPath ) -> WeatherInfoViewModel
     var showAlertClosure: (() -> Void)? { get set }
     var updateLoadingStatus: (() -> Void)? { get set }
-    var reloadTableViewClosure: (() -> Void)? { get set }
+    var reloadData: (() -> Void)? { get set }
 }
 
 class WeatherViewModel: WeatherViewModelLogic {
@@ -38,9 +37,9 @@ class WeatherViewModel: WeatherViewModelLogic {
     }
 
     // MARK: - fetched result from weatherData
-    var weatherInfo: WeatherInfoModel? {
+    var weatherInfo: WeatherInfoViewModel? {
         didSet {
-            self.reloadTableViewClosure?()
+            self.reloadData?()
         }
     }
     var numberOfCells: Int {
@@ -61,28 +60,17 @@ class WeatherViewModel: WeatherViewModelLogic {
     // MARK: closures for binding
     var showAlertClosure: (() -> Void)?
     var updateLoadingStatus: (() -> Void)?
-    var reloadTableViewClosure: (() -> Void)?
+    var reloadData: (() -> Void)?
     // MARK: - prepare weather data
     private func processWeatherData(data: WeatherModel?) {
         if let weather = data {
-            weatherInfo = WeatherInfoModel(data: weather)
+            weatherInfo = WeatherInfoViewModel(data: weather)
         }
     }
     // MARK: - process fetched result
-    func getCellViewModel( at indexPath: IndexPath ) -> String {
-        return weatherInfo?.cityName ?? ""
+    func getCellViewModel( at indexPath: IndexPath ) -> WeatherInfoViewModel {
+        return weatherInfo!
     }
-
- 
-    // MARK: - get current time
-    func getTime() -> String {
-         let time = Date()
-         let timeFormatter = DateFormatter()
-         timeFormatter.dateFormat = "HH:mm a"
-         timeFormatter.locale = Locale(identifier: "en")
-         let stringDate = timeFormatter.string(from: time)
-         return stringDate
-        }
 }
 
 // MARK: - Network Calls
