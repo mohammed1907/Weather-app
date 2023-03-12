@@ -143,6 +143,9 @@
                                 <fontDescription key="fontDescription" name="SFProText-Medium" family="SF Pro Text" pointSize="15"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <state key="normal" title="Cancel"/>
+                                <connections>
+                                    <action selector="dismissPressed:" destination="ENI-Og-26g" eventType="touchUpInside" id="AHa-DO-YaJ"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="xxz-QE-OIv"/>

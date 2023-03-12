@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SVProgressHUD
 protocol WeatherInfoDelegate: AnyObject{
     func getCity(name: String)
 }
@@ -71,11 +72,11 @@ private extension AddCityViewController {
                 }
                 switch self.viewModel.state {
                 case .empty, .error:
-                    print("stoploading")
+                    SVProgressHUD.dismiss()
                 case .loading:
-                    print("loading")
+                    SVProgressHUD.show()
                 case .populated:
-                    print("stoploading")
+                    SVProgressHUD.dismiss()
                 }
             }
         }
@@ -121,5 +122,11 @@ extension AddCityViewController: UISearchBarDelegate {
         if !(searchBar.text?.isEmpty ?? false) {
             setupBinding()
         }
+    }
+}
+//MARK: Actions
+extension AddCityViewController{
+    @IBAction func dismissPressed(_ sender: Any) {
+        self.dismiss(animated: true)
     }
 }

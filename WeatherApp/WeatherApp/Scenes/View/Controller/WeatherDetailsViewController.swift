@@ -7,6 +7,7 @@
 
 import UIKit
 import Kingfisher
+import SVProgressHUD
 class WeatherDetailsViewController: UIViewController {
 
     // MARK: - Outlets
@@ -75,11 +76,11 @@ private extension WeatherDetailsViewController {
                 }
                 switch self.viewModel.state {
                 case .empty, .error:
-                    print("stoploading")
+                    SVProgressHUD.dismiss()
                 case .loading:
-                    print("loading")
+                    SVProgressHUD.show()
                 case .populated:
-                    print("stoploading")
+                    SVProgressHUD.dismiss()
                 }
             }
         }
