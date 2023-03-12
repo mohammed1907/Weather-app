@@ -47,21 +47,19 @@ private extension CityViewController {
             }
             self.tableView.reloadData()
         }
+        viewModel.getCities()
     }
 
 }
 
-extension CityViewController: WeatherInfo{
+extension CityViewController{
     @IBAction func addCityPressed(_ sender: Any) {
         let controller = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: AddCityViewController.identifier) as! AddCityViewController
-        controller.delegate = self
+        controller.delegate = viewModel
         self.present(controller, animated: true)
     }
     
-    func getCity(name: String) {
-        viewModel.cityArray?.append(name)
-    }
-    
+   
     
 }
 // MARK: - TableView DataSource
@@ -77,8 +75,16 @@ extension CityViewController: UITableViewDataSource {
         cell.accessoryType = .detailDisclosureButton
 
         let cellVM = viewModel.getCellViewModel( at: indexPath )
-        cell.searchData = cellVM
+        cell.searchData = cellVM.name
         return cell
+    }
+    func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { [weak self] (action, view, completionHandler) in
+            self?.deleteCityAction(indexPath: indexPath)
+            completionHandler(true)
+        }
+        
+        return UISwipeActionsConfiguration(actions: [deleteAction])
     }
 }
 
@@ -87,9 +93,30 @@ extension CityViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         //TODO: Navigate to details
         let controller = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: WeatherDetailsViewController.identifier) as! WeatherDetailsViewController
-        controller.cityName = viewModel.getCellViewModel( at: indexPath )
+        controller.city = viewModel.getCellViewModel( at: indexPath )
         self.present(controller, animated: true)
         //TODO: Handle coreData
         
+    }
+    func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
+        //TODO: Navigate to historic weather
+    }
+    
+}
+//MARK: Handle swipe
+extension CityViewController{
+    private func deleteCityAction(indexPath: IndexPath) {
+        let city = viewModel.cityArray?[indexPath.row]
+      let areYouSureAlert = UIAlertController(title: "Are you sure you want to delete this city?", message: "", preferredStyle: .alert)
+      let yesDeleteAction = UIAlertAction(title: "Yes", style: .destructive) { [self] (action) in
+        DataManager.shared.deleteCity(city: city!)
+        viewModel.cityArray?.remove(at: indexPath.row)
+      }
+      let noDeleteAction = UIAlertAction(title: "No", style: .default) { (action) in
+        //do nothing
+      }
+      areYouSureAlert.addAction(noDeleteAction)
+      areYouSureAlert.addAction(yesDeleteAction)
+      self.present(areYouSureAlert, animated: true, completion: nil)
     }
 }

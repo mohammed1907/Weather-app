@@ -21,10 +21,10 @@ class WeatherDetailsViewController: UIViewController {
     @IBOutlet weak var weatherDate: UILabel!
     
     // MARK: - Properties
-    lazy private var viewModel: WeatherViewModelLogic = {
-        return WeatherViewModel()
+    lazy private var viewModel: WeatherDetailsViewModelLogic = {
+        return WeatherDetailsViewModel()
     }()
-    var cityName = ""
+    var city : City?
     @IBAction func dismissPressed(_ sender: Any) {
         self.dismiss(animated: true)
     }
@@ -47,7 +47,7 @@ extension WeatherDetailsViewController {
 // MARK: - Setup UI
 private extension WeatherDetailsViewController{
     func setupUI() {
-        cityTitle.text = cityName.uppercased()
+        cityTitle.text = city?.name?.uppercased()
     }
 
 
@@ -88,14 +88,15 @@ private extension WeatherDetailsViewController {
             guard let self = self else {
                 return
             }
-            if let data = self.viewModel.weatherInfo{
+            if let data = self.viewModel.weatherDataInfo{
                 self.setupWeatherData(data: data)
             }
         }
-        viewModel.getWeather(name: cityName)
+        viewModel.city = city
+        viewModel.getWeatherList()
+        viewModel.getWeather(name: city?.name ?? "")
     }
     func setupWeatherData(data: WeatherInfoViewModel){
-        print("dkd\(data.iconImage)")
         if let url = URL(string:data.iconImage.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""){
                weatherImage.kf.setImage(with: url)
            }
@@ -103,7 +104,7 @@ private extension WeatherDetailsViewController {
         weatherTemprature.text = data.weatherTemp
         weatherWind.text = data.wind
         weatherHumidity.text = data.humidity
-        weatherDate.text = "WEATHER INFORMATION FOR \(cityName.uppercased()) RECEIVED ON \(data.weatherTime)"
+        weatherDate.text = "WEATHER INFORMATION FOR \(city?.name?.uppercased() ?? "") RECEIVED ON \(data.weatherTime)"
     }
 
 }

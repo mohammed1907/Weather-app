@@ -1,49 +1,54 @@
 //
-//  SearchViewModel.swift
+//  WeatherDetailsViewModel.swift
 //  WeatherApp
 //
-//  Created by Farghaly on 11/03/2023.
+//  Created by Omar Hassanein on 12/03/2023.
 //
 
 import Foundation
 
-protocol WeatherViewModelLogic {
+protocol WeatherDetailsViewModelLogic {
     // MARK: Properties
-    var weatherInfo: WeatherInfoViewModel? { get }
+    var weatherDataInfo: WeatherInfoViewModel? { get }
     var alertMessage: String? { get }
     var state: State { get }
+    var city: City? {get set}
     var numberOfCells: Int { get }
-
+    
     // MARK: Actions
+    func getWeatherList()
     func getWeather(name: String)
-    func getCellViewModel( at indexPath: IndexPath ) -> String
     var showAlertClosure: (() -> Void)? { get set }
     var updateLoadingStatus: (() -> Void)? { get set }
     var reloadData: (() -> Void)? { get set }
 }
 
-class WeatherViewModel: WeatherViewModelLogic {
+class WeatherDetailsViewModel: WeatherDetailsViewModelLogic {
+    var city: City?
+    var weather = [WeatherInfo]()
+    
     private let apiService: WeatherService
-
+    
     init(apiService: WeatherService = WeatherServiceImpl()) {
         self.apiService = apiService
     }
-
+    
     // MARK: - API result
     private var weatherData: WeatherModel? {
         didSet {
             self.processWeatherData(data: weatherData)
         }
     }
-
+    
     // MARK: - fetched result from weatherData
-    var weatherInfo: WeatherInfoViewModel? {
+    var weatherDataInfo: WeatherInfoViewModel? {
         didSet {
+            saveWeather()
             self.reloadData?()
         }
     }
     var numberOfCells: Int {
-        return weatherInfo != nil ? 1 : 0
+        return weatherDataInfo != nil ? 1 : 0
     }
     // MARK: - callback for interfaces
     var state: State = .empty {
@@ -56,7 +61,7 @@ class WeatherViewModel: WeatherViewModelLogic {
             self.showAlertClosure?()
         }
     }
-
+    
     // MARK: closures for binding
     var showAlertClosure: (() -> Void)?
     var updateLoadingStatus: (() -> Void)?
@@ -64,17 +69,25 @@ class WeatherViewModel: WeatherViewModelLogic {
     // MARK: - prepare weather data
     private func processWeatherData(data: WeatherModel?) {
         if let weather = data {
-            weatherInfo = WeatherInfoViewModel(data: weather)
+            weatherDataInfo = WeatherInfoViewModel(data: weather)
         }
     }
-    // MARK: - process fetched result
-    func getCellViewModel( at indexPath: IndexPath ) -> String {
-        return weatherInfo?.cityName ?? ""
+    func getWeatherList() {
+        if let city = city {
+            weather = DataManager.shared.weatherList(city: city)
+        }
+    }
+    func saveWeather() {
+        if let city = city {
+            _ = DataManager.shared.weatherInfo(weatherStatus: weatherDataInfo?.weatherStatus ?? "", weatherTime: weatherDataInfo?.weatherTime ?? "", weatherTemp: weatherDataInfo?.weatherTemp ?? "", city: city)
+            DataManager.shared.save()
+            getWeatherList()
+        }
     }
 }
 
 // MARK: - Network Calls
-extension WeatherViewModel {
+extension WeatherDetailsViewModel {
     func getWeather(name: String) {
         state = .loading
         apiService.getWeather(loc: name) {[weak self] result in
@@ -83,14 +96,14 @@ extension WeatherViewModel {
             }
             switch result {
             case .success(let data):
-             self.weatherData = data
-              self.state = .populated
+                self.weatherData = data
+                self.state = .populated
             case .failure(let error):
                 self.state = .error
                 self.alertMessage = error.errorDescription
-                    return
+                return
             }
-
+            
         }
     }
 }

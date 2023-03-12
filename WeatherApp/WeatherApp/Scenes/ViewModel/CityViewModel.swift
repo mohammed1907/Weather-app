@@ -7,20 +7,27 @@
 
 import Foundation
 
-protocol CityViewModelLogic {
+protocol CityViewModelLogic:WeatherInfoDelegate {
     // MARK: Properties
     var numberOfCells: Int { get }
-    var cityArray: [String]? { get set}
+    var cityArray: [City]? { get set}
     // MARK: Actions
-    func getCellViewModel( at indexPath: IndexPath ) -> String
-    func getTime() -> String
-    var reloadData: (() -> Void)? { get set }
+    func getCellViewModel( at indexPath: IndexPath ) -> City
+    func getCities()
+    var  reloadData: (() -> Void)? { get set }
+    func getCity(name: String)
 }
 
 class CityViewModel: CityViewModelLogic {
+    func getCity(name: String) {
+        let city = DataManager.shared.city(name: name)
+        cityArray?.append(city)
+        DataManager.shared.save()
+    }
+    
    
     // MARK: - fetched result from addcity
-    var cityArray: [String]? = [] {
+    var cityArray: [City]? = [] {
         didSet {
             self.reloadData?()
         }
@@ -33,19 +40,15 @@ class CityViewModel: CityViewModelLogic {
 
     
     // MARK: - process fetched result
-    func getCellViewModel( at indexPath: IndexPath ) -> String {
-        return cityArray?[indexPath.row] ?? ""
+    func getCellViewModel( at indexPath: IndexPath ) -> City {
+        return cityArray![indexPath.row]
     }
-
+    
  
     // MARK: - get current time
-    func getTime() -> String {
-         let time = Date()
-         let timeFormatter = DateFormatter()
-         timeFormatter.dateFormat = "HH:mm a"
-         timeFormatter.locale = Locale(identifier: "en")
-         let stringDate = timeFormatter.string(from: time)
-         return stringDate
+    func getCities() {
+        cityArray = DataManager.shared.cities()
+
         }
 }
 

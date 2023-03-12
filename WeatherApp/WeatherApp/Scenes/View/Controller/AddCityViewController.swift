@@ -6,7 +6,7 @@
 //
 
 import UIKit
-protocol WeatherInfo: AnyObject{
+protocol WeatherInfoDelegate: AnyObject{
     func getCity(name: String)
 }
 class AddCityViewController: UIViewController {
@@ -16,7 +16,7 @@ class AddCityViewController: UIViewController {
     @IBOutlet weak var searchBar: UISearchBar!
     
     // MARK: - Properties
-    weak var delegate: WeatherInfo?
+    weak var delegate: WeatherInfoDelegate?
     lazy private var viewModel: WeatherViewModelLogic = {
         return WeatherViewModel()
     }()
@@ -101,7 +101,7 @@ extension AddCityViewController: UITableViewDataSource {
             fatalError("Cell not exists in storyboard")
         }
         let cellVM = viewModel.getCellViewModel( at: indexPath )
-        cell.searchData = cellVM.cityName
+        cell.searchData = cellVM
         return cell
     }
 }
@@ -109,7 +109,7 @@ extension AddCityViewController: UITableViewDataSource {
 // MARK: - TableView Delegate
 extension AddCityViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        delegate?.getCity(name: viewModel.getCellViewModel( at: indexPath ).cityName)
+        delegate?.getCity(name: viewModel.getCellViewModel( at: indexPath ))
         dismiss(animated: true)
 
     }

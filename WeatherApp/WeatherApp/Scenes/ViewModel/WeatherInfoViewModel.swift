@@ -24,4 +24,13 @@ struct WeatherInfoViewModel {
         self.iconImage = "\(Config.imgBaseURL)\(data.weather[0].icon).png"
         self.weatherTime = "".getTime()
     }
+    init(cityName: String, weatherStatus: String, weatherTemp: String, wind: String, humidity: String,iconImage: String,weatherTime: String) {
+            self.cityName = cityName
+            self.weatherStatus = weatherStatus
+            self.weatherTemp = weatherTemp
+            self.wind = wind
+            self.humidity = humidity
+            self.iconImage = iconImage
+           self.weatherTime = weatherTime
+        }
 }
