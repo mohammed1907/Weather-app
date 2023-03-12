@@ -99,7 +99,9 @@ extension CityViewController: UITableViewDelegate {
         
     }
     func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
-        //TODO: Navigate to historic weather
+        let controller = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: HistoricalViewController.identifier) as! HistoricalViewController
+        controller.city = viewModel.getCellViewModel( at: indexPath )
+        self.navigationController?.pushViewController(controller, animated: true)
     }
     
 }

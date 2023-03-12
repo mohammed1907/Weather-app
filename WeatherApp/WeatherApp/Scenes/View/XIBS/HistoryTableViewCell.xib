@@ -4,22 +4,74 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="sf-pro-text-bold.ttf">
+            <string>SFProText-Bold</string>
+        </array>
+    </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="74" id="KGk-i7-Jjw" customClass="HistoryTableViewCell" customModule="WeatherApp" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="74"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="HistoryTableViewCell" rowHeight="58" id="CVh-Lp-flf" customClass="HistoryTableViewCell" customModule="WeatherApp" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="58"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="74"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="CVh-Lp-flf" id="cvx-gb-QKv">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="58"/>
                 <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="London, UK" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MqE-Rt-QlN">
+                        <rect key="frame" x="16" y="18.666666666666668" width="288" height="21.000000000000004"/>
+                        <fontDescription key="fontDescription" name="SFProText-Bold" family="SF Pro Text" pointSize="15"/>
+                        <color key="textColor" name="weatherData"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="awu-Iz-L84">
+                        <rect key="frame" x="16" y="55" width="304" height="1"/>
+                        <color key="backgroundColor" name="separatorColor"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="6EC-LI-yAq"/>
+                        </constraints>
+                    </view>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="01.10.2019 - 16:58" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IWD-rF-aYW">
+                        <rect key="frame" x="16" y="1.9999999999999991" width="288" height="12.666666666666664"/>
+                        <fontDescription key="fontDescription" name="SFProText-Bold" family="SF Pro Text" pointSize="12"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                <constraints>
+                    <constraint firstItem="MqE-Rt-QlN" firstAttribute="trailing" secondItem="IWD-rF-aYW" secondAttribute="trailing" id="46E-pX-sOf"/>
+                    <constraint firstAttribute="trailing" secondItem="awu-Iz-L84" secondAttribute="trailing" id="GEH-9W-naI"/>
+                    <constraint firstItem="awu-Iz-L84" firstAttribute="leading" secondItem="MqE-Rt-QlN" secondAttribute="leading" id="IXi-yn-F5X"/>
+                    <constraint firstItem="MqE-Rt-QlN" firstAttribute="leading" secondItem="cvx-gb-QKv" secondAttribute="leading" constant="16" id="Nmc-tf-MwQ"/>
+                    <constraint firstItem="IWD-rF-aYW" firstAttribute="leading" secondItem="MqE-Rt-QlN" secondAttribute="leading" id="OG1-7w-mdC"/>
+                    <constraint firstAttribute="bottom" secondItem="awu-Iz-L84" secondAttribute="bottom" constant="2" id="RWv-LQ-e9I"/>
+                    <constraint firstItem="MqE-Rt-QlN" firstAttribute="top" secondItem="IWD-rF-aYW" secondAttribute="bottom" constant="4" id="TEZ-gj-0z0"/>
+                    <constraint firstItem="MqE-Rt-QlN" firstAttribute="centerY" secondItem="cvx-gb-QKv" secondAttribute="centerY" id="Uji-sJ-vVB"/>
+                    <constraint firstItem="IWD-rF-aYW" firstAttribute="top" secondItem="cvx-gb-QKv" secondAttribute="top" constant="2" id="d1m-s7-bUd"/>
+                    <constraint firstAttribute="trailing" secondItem="MqE-Rt-QlN" secondAttribute="trailing" constant="16" id="sR3-GL-ceC"/>
+                </constraints>
             </tableViewCellContentView>
-            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <viewLayoutGuide key="safeArea" id="E1s-Yd-swq"/>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-            <point key="canvasLocation" x="138.93129770992365" y="26.760563380281692"/>
+            <connections>
+                <outlet property="historyDate" destination="IWD-rF-aYW" id="ERN-OT-9qh"/>
+                <outlet property="weatherState" destination="MqE-Rt-QlN" id="iNB-yt-rJf"/>
+            </connections>
+            <point key="canvasLocation" x="138.93129770992365" y="7.746478873239437"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <namedColor name="separatorColor">
+            <color red="0.0" green="0.0" blue="0.0" alpha="0.15000000596046448" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="weatherData">
+            <color red="0.13725490196078433" green="0.53333333333333333" blue="0.7803921568627451" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
 </document>

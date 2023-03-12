@@ -17,7 +17,6 @@ class WeatherDetailsViewController: UIViewController {
     @IBOutlet weak var weatherTemprature: UILabel!
     @IBOutlet weak var weatherHumidity: UILabel!
     @IBOutlet weak var weatherWind: UILabel!
-    
     @IBOutlet weak var weatherDate: UILabel!
     
     // MARK: - Properties
