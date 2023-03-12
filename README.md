@@ -1,3 +1,6 @@
+## Project Structure
+
+```
 .
 ├── Weather-app
 │   │   ├── App             # cotnains `AppDelegate` and `SceneDelegate`
@@ -10,10 +13,23 @@
 │   │   ├── Assets       # contains Assets and font 
 │   │   ├──  Unit-Tests     
 └── 
+```
 
 ### Architecture
 The project uses the **MVVM** design Pattern.
 --- 
+### Layered architecture
+
+Each module is divided by layers:
+
+```
+├── Service
+├── ViewModel
+├── View
+│   ├── Cell
+│   └── Layout
+```
+
 ### Dependencies
 - **Kingfisher**
 - **Alamofire**
